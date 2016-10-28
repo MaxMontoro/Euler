@@ -23,7 +23,15 @@ def tidier():
         for a in range(1, c):
             b = 1000 - c - a
             if a**2 + b**2 == c**2:
-                return a, b, c
+                return [a, b, c]
+            
+def product(args):
+    product = 1
+    for arg in args:
+        product *= arg
+    return product
+    
                     
 #print(find_special_Pythagorean())
 print(tidier())
+print(product(tidier()))
