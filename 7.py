@@ -6,13 +6,14 @@ By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that 
 What is the 10 001st prime number?
 '''
 
-from itertools import count, takewhile
+from itertools import count
+from math import sqrt
 
 def prime_generator(n):
     index = 1
     for num in count(3):
         prime = True
-        for divisor in range((num//2)+1, 1,-1):
+        for divisor in range(int(sqrt(num)), 1,-1):
             if num % divisor == 0:
                 prime = False
                 break
