@@ -6,6 +6,11 @@ The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
 Find the sum of all the primes below two million.
 '''
 
+'''
+Trial division is much too slow . . .
+Erastothenes's sieve is far better.
+'''
+
 from itertools import count
 from math import sqrt
 from timeit import Timer
