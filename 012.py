@@ -25,6 +25,9 @@ from math import sqrt
 def generate_triangle_number(n):
     return sum(range(n+1))
 
+def generate_triangle_number_gauss(n):
+    return (n*(n+1))//2
+
 def get_number_of_divisors(n):
     if n ==1:
         return 1
@@ -38,12 +41,21 @@ def get_triangle_with_divisors_over(n):
     for i in count(1):
         ith_triangle = generate_triangle_number(i)
         if get_number_of_divisors(ith_triangle) > n:
-            print(ith_triangle)
+            #print(ith_triangle)
+            return ith_triangle
+            break
+
+def get_triangle_with_divisors_over_gauss(n):
+    for i in count(1):
+        ith_triangle = generate_triangle_number_gauss(i)
+        if get_number_of_divisors(ith_triangle) > n:
+            #print(ith_triangle)
             return ith_triangle
             break
         
-get_triangle_with_divisors_over(500)
+# get_triangle_with_divisors_over(500)
 
 if __name__ == '__main__':
     import timeit
-    print(timeit.timeit("get_triangle_with_divisors_over(500)", setup="from __main__ import get_triangle_with_divisors_over", number=1))
+    print(timeit.timeit("get_triangle_with_divisors_over(50)", setup="from __main__ import get_triangle_with_divisors_over", number=1000))
+    print(timeit.timeit("get_triangle_with_divisors_over_gauss(50)", setup="from __main__ import get_triangle_with_divisors_over_gauss", number=1000))
