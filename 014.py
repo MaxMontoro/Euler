@@ -16,19 +16,22 @@ Which starting number, under one million, produces the longest chain?
 NOTE: Once the chain starts the terms are allowed to go above one million.
 '''
 
-def len_collatz(start, terms=1):
+def len_collatz_memo(start, terms=1, memo={1:1}):
+    if start in memo:
+        return memo[start]
     if start == 1:
         return terms
     if start % 2 == 0:
-        next_one = start//2
+        terms = len_collatz_memo(start//2)+1
     else:
-        next_one = 3*start + 1
-    return len_collatz(next_one, terms+1)
+        terms = len_collatz_memo(3*start + 1) + 1
+    memo[start] = terms
+    return terms
 
 longest = 0
 started_at = 0
 for start in range(1,1000000):
-    length = len_collatz(start)
+    length = len_collatz_memo(start)
     if length > longest:
         longest = length
         started_at = start
