@@ -18,6 +18,13 @@ We can see that 28 is the first triangle number to have over five divisors.
 
 What is the value of the first triangle number to have over five hundred divisors?
 '''
+
+'''
+TODO:
+1. add recursive solution with memoization
+2. 
+'''
+
 from itertools import count
 from math import sqrt
 
@@ -34,7 +41,7 @@ def get_number_of_divisors_with_memo(n):
         return 1
     divisors = 0
     if n in memo: return memo[n]
-    for i in range(int(sqrt(n)), 1, -1):    
+    for i in range(int(sqrt(n)), 1, -1):
         if n % i == 0:
             divisors += 2
     memo[n] = divisors
@@ -69,10 +76,24 @@ def get_triangle_with_divisors_over_n_with_gauss_memo(n):
         ith_triangle = generate_triangle_number_gauss(i)
         if get_number_of_divisors_with_memo(ith_triangle) > n:
             return ith_triangle
-            break
-
         
-print(get_triangle_with_divisors_over_n_with_gauss_memo(100))
+'''
+It can be done with prime factorization almost as quickly as with memoization
+'''        
+
+def get_triangle_with_divisors_over_n_with_factorization(n):
+    for i in count(1):
+        ith_triangle = generate_triangle_number_gauss(i)
+        if get_factors(ith_triangle) > n:
+            return ith_triangle
+
+def get_factors(n):
+    return sum(2 for i in range(1, round(sqrt(n)+1)) if not n % i)
+
+
+print(get_triangle_with_divisors_over_n_with_factorization(100))
+        
+#print(get_triangle_with_divisors_over_n_with_gauss_memo(100))
 
 if __name__ == '__main__':
     import timeit
