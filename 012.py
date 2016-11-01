@@ -28,11 +28,24 @@ def generate_triangle_number(n):
 def generate_triangle_number_gauss(n):
     return (n*(n+1))//2
 
+memo = {1:1}
+def get_number_of_divisors_with_memo(n):
+    if n ==1:
+        return 1
+    divisors = 0
+    if n in memo: return memo[n]
+    for i in range(int(sqrt(n)), 1, -1):    
+        if n % i == 0:
+            divisors += 2
+    memo[n] = divisors
+    return divisors
+
+
 def get_number_of_divisors(n):
     if n ==1:
         return 1
     divisors = 0
-    for i in range(1, int(sqrt(n))):
+    for i in range(1,int(sqrt(n))):
         if n % i == 0:
             divisors += 2
     return divisors
@@ -41,7 +54,6 @@ def get_triangle_with_divisors_over(n):
     for i in count(1):
         ith_triangle = generate_triangle_number(i)
         if get_number_of_divisors(ith_triangle) > n:
-            #print(ith_triangle)
             return ith_triangle
             break
 
@@ -49,13 +61,21 @@ def get_triangle_with_divisors_over_gauss(n):
     for i in count(1):
         ith_triangle = generate_triangle_number_gauss(i)
         if get_number_of_divisors(ith_triangle) > n:
-            #print(ith_triangle)
             return ith_triangle
             break
+
+def get_triangle_with_divisors_over_n_with_gauss_memo(n):
+    for i in count(1):
+        ith_triangle = generate_triangle_number_gauss(i)
+        if get_number_of_divisors_with_memo(ith_triangle) > n:
+            return ith_triangle
+            break
+
         
-# get_triangle_with_divisors_over(500)
+print(get_triangle_with_divisors_over_n_with_gauss_memo(100))
 
 if __name__ == '__main__':
     import timeit
-    print(timeit.timeit("get_triangle_with_divisors_over(50)", setup="from __main__ import get_triangle_with_divisors_over", number=1000))
-    print(timeit.timeit("get_triangle_with_divisors_over_gauss(50)", setup="from __main__ import get_triangle_with_divisors_over_gauss", number=1000))
+    #print(timeit.timeit("get_triangle_with_divisors_over(100)", setup="from __main__ import get_triangle_with_divisors_over", number=100))
+    #print(timeit.timeit("get_triangle_with_divisors_over_gauss(100)", setup="from __main__ import get_triangle_with_divisors_over_gauss", number=100))
+    print(timeit.timeit("get_triangle_with_divisors_over_n_with_gauss_memo(500)", setup="from __main__ import get_triangle_with_divisors_over_n_with_gauss_memo", number=1))
