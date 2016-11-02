@@ -28,7 +28,6 @@ TODO:
 from itertools import count
 from math import sqrt
 
-
 def generate_triangle_number(n):
     return sum(range(n+1))
 
@@ -41,7 +40,7 @@ def get_number_of_divisors_with_memo(n):
         return 1
     divisors = 0
     if n in memo: return memo[n]
-    for i in range(int(sqrt(n)), 1, -1):
+    for i in range(int(sqrt(n)), 0, -1):
         if n % i == 0:
             divisors += 2
     memo[n] = divisors
@@ -91,7 +90,7 @@ def get_factors(n):
     return sum(2 for i in range(1, round(sqrt(n)+1)) if not n % i)
 
 
-print(get_triangle_with_divisors_over_n_with_factorization(100))
+# print(get_triangle_with_divisors_over_n_with_factorization(500))
         
 #print(get_triangle_with_divisors_over_n_with_gauss_memo(100))
 
@@ -99,4 +98,4 @@ if __name__ == '__main__':
     import timeit
     #print(timeit.timeit("get_triangle_with_divisors_over(100)", setup="from __main__ import get_triangle_with_divisors_over", number=100))
     #print(timeit.timeit("get_triangle_with_divisors_over_gauss(100)", setup="from __main__ import get_triangle_with_divisors_over_gauss", number=100))
-    print(timeit.timeit("get_triangle_with_divisors_over_n_with_gauss_memo(500)", setup="from __main__ import get_triangle_with_divisors_over_n_with_gauss_memo", number=1))
+    #print(timeit.timeit("get_triangle_with_divisors_over_n_with_gauss_memo(500)", setup="from __main__ import get_triangle_with_divisors_over_n_with_gauss_memo", number=1))
