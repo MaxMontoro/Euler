@@ -6,4 +6,4 @@ Problem 16
 What is the sum of the digits of the number 21000?
 '''
 
-print(sum([int(digit) for digit in list(str(2**1000))]))
+print(sum([int(digit) for digit in list(str(2**1000))])) # List comprehension: not a quick solution.
